@@ -2,11 +2,15 @@ import { Template } from 'meteor/templating';
 
 import { Tasks } from '../api/tasks.js';
 
+import './task.html';
 import './body.html';
 
 
+
 Template.body.helpers({
-    tasks() { return Tasks.find({}) }
+    tasks() { 
+        return Tasks.find({}, { sort: {createdAt: -1 } })
+    }
 });
 
 Template.body.events({
@@ -16,7 +20,6 @@ Template.body.events({
 
         // get value from form element
         const text = event.target.text.value;
-        console.log(event)
 
         // Insert typed task into collection
         Tasks.insert({
@@ -28,5 +31,5 @@ Template.body.events({
         event.target.text.value = '';
 
     }
-})
+});
 
