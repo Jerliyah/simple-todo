@@ -15,8 +15,8 @@ Template.body.onCreated(function bodyonCreated() {
 Template.body.helpers({
   tasks() {
       const instance = Template.instance();
-      if( instance.state.get('hideCompleted') ) {
-          return Tasks.find({checked: {$ne: true } }, { sort: { createdAt: -1 } })
+      if( instance.state.get('hide_stuff') ) {
+          return Tasks.find({checked: {$eq: false } }, { sort: { createdAt: -1 } })
       }
       return Tasks.find({}, {sort: {createdAt: -1 } });
   },
@@ -32,11 +32,12 @@ Template.body.events({
         Tasks.insert({
             text,
             createdAt: new Date(),
+            checked: false
         });
 
         target.text.value = ''
     },
     'change .hide-completed input'(event, instance) {
-        instance.state.set('hideCompleted', event.target.checked);
+        instance.state.set('hide_stuff', event.target.checked);
     }
 })
