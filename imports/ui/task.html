@@ -16,8 +16,10 @@
     
         <span class="text"><b>{{username}}</b> - {{text}}</span>
 
-        <button class="delete">&times;</button>
-    
+        {{#if isOwner}}
+          <button class="delete">&times;</button>
+        {{/if}}
+        
       </li>
     
     </template>
