@@ -20,6 +20,9 @@ Template.body.helpers({
       }
       return Tasks.find({}, {sort: {createdAt: -1 } });
   },
+  incompleteCount() {
+      return Tasks.find({checked: {$eq: false} }).count();
+  }
 });
 
 Template.body.events({
