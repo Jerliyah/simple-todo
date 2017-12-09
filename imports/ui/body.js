@@ -32,12 +32,14 @@ Template.body.events({
         const target = event.target;
         const text = target.text.value;
 
+        
+
         Tasks.insert({
             text,
             createdAt: new Date(),
             checked: false,
             owner: Meteor.userId(),
-            username: Meteor.user().username
+            username: Meteor.user().username || Meteor.user().profile.name
         });
 
         target.text.value = ''
